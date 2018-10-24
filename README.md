@@ -72,6 +72,21 @@ handsfree.use({
 })
 ```
 
+## Events
+An alternative to plugins is to use listen in on the window `handsfree-trackFaces` event:
+
+```js
+/**
+ * Bind to the handsfree-trackFaces event
+ * @param {Handsfree} ev.detail.scope The handsfree instance
+ * @param {Object}    ev.detail.faces An array of face objects
+ */
+window.addEventListener('handsfree-trackFaces', (ev) => {
+  // Do code with the handsfree instance: ev.detail.scope
+  // or with the faces ev.detail.faces.forEach(face => {})
+})
+```
+
 ## License
 Uses BRFv4: https://github.com/Tastenkunst/brfv4_javascript_examples
 Uses Haar Cascade: haarcascade_frontalface_default.xml

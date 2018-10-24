@@ -132,6 +132,12 @@ class Handsfree {
     this.calculateXY()
     this.onFrameHooks(this.faces[0])
 
+    // Dispatch global event
+    window.dispatchEvent(new CustomEvent('handsfree-trackFaces', {detail: {
+      scope: this,
+      faces: this.faces[0]
+    }}))
+
     // Only loop if we're tracking
     this.isTracking && requestAnimationFrame(() => this.trackFaces())
   }
