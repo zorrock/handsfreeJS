@@ -1,4 +1,4 @@
-![](/assets/handsfree-2.0-readme-cover.gif)
+<div align="center"><img src="/assets/handsfree-2.0-readme-cover.gif" alt="handsfree.js 2.0"></div>
 
 > A drop-in library for adding face-controlled mouse pointers via computer vision 🙈
 
