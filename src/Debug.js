@@ -25,9 +25,9 @@ module.exports = Handsfree => {
     $canvas.style.transform = 'scale(-1, 1)'
     $canvas.style.position = 'absolute'
     $canvas.style.top = '0px'
-    $canvas.style.left = '0px'
-    $canvas.style.width = '100%'
-    $canvas.style.height = '100%'
+    $canvas.style.left = '-25%'
+    $canvas.style.width = '150%'
+    $canvas.style.height = 'auto'
 
     // Inject
     $parent = document.querySelector('.handsfree-debug-wrap')
