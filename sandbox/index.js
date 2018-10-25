@@ -14,6 +14,7 @@ window.addEventListener('handsfree-injectDebugger', (ev) => {
   handsfree.debug.$canvas.parentElement.style.display = 'block'
 
   handsfree.drawFaces()
+  document.querySelector('body > div').style.opacity = '1'
 })
 
 /**
