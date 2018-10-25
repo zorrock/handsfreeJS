@@ -26,6 +26,24 @@ img, svg
   background: -webkit-linear-gradient(-45deg, #ffff00 20%, #f608ff 35%,#9653fa 60%,#0dd39f 95%,#4096ee 100%) /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(135, #ffff00 20%, #f608ff 35%,#9653fa 60%,#0dd39f 95%,#4096ee 100%) /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 
+// Handsfree states
+body.handsfree-stopped .handsfree-show-when-stopped
+  display: inherit
+  &.btn
+    display: inline-block
+body.handsfree-stopped .handsfree-show-when-started
+  display: none
+body.handsfree-started .handsfree-show-when-stopped
+  display: none
+body.handsfree-started .handsfree-show-when-started
+  display: inherit
+  &.btn
+    display: inline-block
+
+// Spectre.css
+.card
+  margin-bottom: 20px
+
 // LOGO
 $logoSize = 300px
 #logo

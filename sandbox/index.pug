@@ -6,7 +6,7 @@ div
       path(d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body")
   .container
     .columns
-      .column.col-6.col-xs-12.col-mx-auto
+      .column.col-6.col-md-8.col-sm-10.col-xs-12.col-mx-auto
         #logo
           .logo-sparkles
             div
@@ -14,13 +14,38 @@ div
                 div
                   .handsfree-debug-wrap
 
-        .text-center
-          h1 <strong class="badge" data-badge="2.0">handsfree.js</strong> 🎉
-                    
-        p <b>Hey fellow Browsers</b>, I'm <a href="https://labofoz.com">Oz Ramos</a> and I've finally got handsfree.js v2 out! Handsfree.js is a library for creating handsfree interfaces and was rewritten to be much more developer, tester, and demo friendly.
-        p I'm using it myself for developing <a href="https://browsehandsfree.com">browsehandsfree.com</a>, a website that will let you browse other websites handsfree (that was my MVP, it still needs work 😅)! Click <kbd class="cursor-pointer" onclick='handsfree.start()'>Start Webcam</kbd> after seeing the my <a href="https://labofoz.com/2018/10/24/thinking-about-privacy-and-security/">Privacy and Security notes</a> (I'll write a proper page soon).
-    .columns
-      .column.col-3.col-xs-12.col-mx-auto
-        p.text-center
-          button.btn.btn-primary(onclick='handsfree.start()') Start Webcam
-      
+        // Intro Card
+        .card
+          .card-header
+            h1.card-title.text-center <strong class="badge" data-badge="2.0">handsfree.js</strong>
+            p.text-center
+              img.mr-1(src='https://img.shields.io/npm/v/handsfree.svg')
+              img.mr-1(src='https://img.shields.io/github/last-commit/BrowseHandsfree/handsfreeJS.svg')
+              img.mr-1(src='https://travis-ci.org/BrowseHandsfree/handsfreeJS.svg?branch=master')
+              img.mr-1(src='https://img.shields.io/codecov/c/github/BrowseHandsfree/handsfreeJS/master.svg?style=flat')
+            p.card-subtitle.text-gray A JavaScript drop-in library for adding handsfree interfaces to any website, service, and Internet of Thing, and also for creating handsfree games and experiences. Runs on any device that supports the WebRTC protocol.
+          .card-body(style='padding-top: 0')
+            p.text-center
+              button.btn.btn-primary.handsfree-show-when-stopped(onclick='handsfree.start()') Start Webcam
+              button.btn.btn-error.handsfree-show-when-started(onclick='handsfree.stop()') Stop Webcam
+            p 🎉 <b>Hello Fellow Browsers</b>, I'm <a href="https://labofoz.com">Oz Ramos</a> and I've finally got handsfree.js v2 out! Handsfree.js v2 was rewritten to be much easier for developers and end-users. I've also introduced a better plugin architecture and so we're going to be exploring a lot of fun applications!
+            p Click <kbd class="cursor-pointer" onclick='handsfree.start()'>Start Webcam</kbd> above after seeing my work-in-progress <a href="https://labofoz.com/2018/10/24/thinking-about-privacy-and-security/">Privacy and Security notes</a>. Hit me up with questions <a href="https://twitter.com/labofoz">@labofoz</a> and don't forget to <a href="https://patreon.com/browsehandsfree">check out my Patreon</a>!
+
+        // Installation Notes
+        .card
+          .card-header
+            h2.card-title Installation
+          .card-body
+            p via HTML:
+            pre &lt;script src="https://unpkg.com/handsfree"&gt;&lt;/script&gt;
+            
+            p via NPM:
+            pre npm i handsfree
+            
+            p Then in your project:
+            
+            pre. 
+              &lt;script src="https://unpkg.com/handsfree"&gt;
+                const HandsfreeModule = require('handsfree')
+                const handsfree = new HandsfreeModule({autopointers: true})
+              &lt;/script&gt;
