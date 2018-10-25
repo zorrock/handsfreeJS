@@ -76,7 +76,6 @@ module.exports = Handsfree => {
       // Resize canvas to stream
       $canvas.width = $webcam.videoWidth
       $canvas.height = $webcam.videoHeight
-      this.debug.ctx = $canvas.getContext('2d')
 
       this.waitForSDK()
     }

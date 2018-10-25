@@ -1,4 +1,4 @@
-![](/assets/handsfree-2.0-readme-cover.gif)
+<div align="center"><img src="/assets/handsfree-2.0-readme-cover.gif" alt="handsfree.js 2.0"></div>
 
 > A drop-in library for adding face-controlled mouse pointers via computer vision 🙈
 
@@ -71,6 +71,40 @@ handsfree.use({
   onFrame: face => {}
 })
 ```
+
+## Events
+### handsfree-trackFaces
+An alternative to plugins is to use listen in on the window `handsfree-trackFaces` event:
+
+```js
+/**
+ * Bind to the handsfree-trackFaces event
+ * @param {Handsfree} ev.detail.scope The handsfree instance
+ * @param {Object}    ev.detail.faces An array of face objects
+ */
+window.addEventListener('handsfree-trackFaces', (ev) => {
+  // Do code with the handsfree instance: ev.detail.scope
+  // or with the faces ev.detail.faces.forEach(face => {})
+})
+```
+
+### handsfree-injectDebugger
+The `handsfree-injectDebugger` event is fired after the debugger is injected, but before handsfree is started. Use this event to draw into the canvas without the camera being turned one.
+
+```js
+/**
+ * Bind to the handsfree-injectDebugger event
+ * @param {Handsfree}       ev.detail.scope The handsfree instance
+ * @param {Canvas2DContent} ev.detail.canvasContext The 2D debug canvas context
+ */
+window.addEventListener('handsfree-injectDebugger', (ev) => {
+  // Do code with the handsfree instance: ev.detail.scope
+  // or draw into the canvas with ev.detail.canvasContext
+})
+```
+
+## Classes
+The document body contains `.handsfree-stopped` when handsfree is stopped (this includes when it's been initialized but not started), and `.handsfree-started` when it's on. This lets you style any page on the page!
 
 ## License
 Uses BRFv4: https://github.com/Tastenkunst/brfv4_javascript_examples

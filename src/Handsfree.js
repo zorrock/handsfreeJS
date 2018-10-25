@@ -76,7 +76,7 @@ class Handsfree {
       this.debug.$webcam.srcObject = mediaStream
       this.debug.$webcam.play()
 
-      if (this.debug.ctx === null) {
+      if (!this.brf.sdk) {
         this.startBRFv4()
       } else {
         this.trackFaces()
@@ -131,6 +131,12 @@ class Handsfree {
     this.debug.isDebugging && this.drawFaces()
     this.calculateXY()
     this.onFrameHooks(this.faces[0])
+
+    // Dispatch global event
+    window.dispatchEvent(new CustomEvent('handsfree-trackFaces', {detail: {
+      scope: this,
+      faces: this.faces
+    }}))
 
     // Only loop if we're tracking
     this.isTracking && requestAnimationFrame(() => this.trackFaces())
