@@ -36,6 +36,12 @@ module.exports = Handsfree => {
     $parent.appendChild($wrap)
     $wrap.appendChild($webcam)
     $wrap.appendChild($canvas)
+
+    this.debug.ctx = $canvas.getContext('2d')
+    window.dispatchEvent(new CustomEvent('handsfree-injectDebugger', {detail: {
+      scope: this,
+      canvasContext: this.debug.ctx
+    }}))
   }
 
   /**
@@ -46,7 +52,8 @@ module.exports = Handsfree => {
     ctx.clearRect(0, 0, this.debug.$canvas.width, this.debug.$canvas.height)
 
     this.faces.forEach(face => {
-      if (face.state === this.brf.sdk.BRFState.FACE_TRACKING_START || face.state === this.brf.sdk.BRFState.FACE_TRACKING) {
+      // We check against !this.brf.sdk because we may occasionally want to draw points without the camera running
+      if (!this.brf.sdk || (face.state === this.brf.sdk.BRFState.FACE_TRACKING_START || face.state === this.brf.sdk.BRFState.FACE_TRACKING)) {
         // Draw Triangles
         ctx.strokeStyle = '#ff0'
         ctx.lineWidth = 2
