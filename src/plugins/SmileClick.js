@@ -5,6 +5,8 @@
 module.exports = {
   name: 'SmileClick',
 
+  hasClicked: false,
+
   onFrame: function (faces, instance) {
     faces.forEach(face => {
       let a
@@ -37,7 +39,9 @@ module.exports = {
         instance.cursor.$el.style.border = '2px solid #ff0'
         instance.cursor.$el.classList.add('handsfree-clicked')
         this.triggerClick(face, instance)
+        this.hasClicked = true
       } else {
+        this.hasClicked = false
         instance.cursor.$el.style.background = '#ff0'
         instance.cursor.$el.style.border = '2px solid #f00'
         instance.cursor.$el.classList.remove('handsfree-clicked')
@@ -53,9 +57,11 @@ module.exports = {
   triggerClick: function (face) {
     const $el = face.cursor.$target
 
-    if ($el) {
+    if ($el && !this.hasClicked) {
       // Click
       $el.dispatchEvent(new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
         clientX: face.cursor.x,
         clientY: face.cursor.y
       }))
