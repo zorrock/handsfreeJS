@@ -130,6 +130,7 @@ class Handsfree {
     // Do things with faces
     this.debug.isDebugging && this.drawFaces()
     this.calculateXY()
+    this.setTouchedElement()
     this.onFrameHooks(this.faces)
 
     // Dispatch global event
@@ -140,6 +141,15 @@ class Handsfree {
 
     // Only loop if we're tracking
     this.isTracking && requestAnimationFrame(() => this.trackFaces())
+  }
+
+  /**
+   * Returns the element under the face and stores it as face.$target
+   */
+  setTouchedElement () {
+    this.faces.forEach((face, i) => {
+      this.faces[i].cursor.$target = document.elementFromPoint(face.cursor.x, face.cursor.y)
+    })
   }
 
   /**

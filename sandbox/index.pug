@@ -66,10 +66,12 @@ div(style='opacity: 0; transition: opacity 0.5s ease')
               pre
                 code.javascript.
                   {
-                    // Where on the screen the user is pointed at
                     cursor: {
+                      // Where on the screen the user is pointed at
                       x: 0,
-                      y: 0
+                      y: 0,
+                      // The target currently under the mouse
+                      $target: 0
                     },
                     
                     // A list of all 64 landmarks
@@ -129,3 +131,54 @@ div(style='opacity: 0; transition: opacity 0.5s ease')
                       })
                     }
                   })
+
+        // The Global Event
+        section
+          .card
+            .card-header
+              h2.card-title Window Events
+            .card-body
+              p If you don't have access to the handsfree instance, or if you don't want to create a plugin, an alternative is to listen to the following window events:
+              
+              pre
+                code.javascript.
+                  /**
+                   * Bind to the handsfree-trackFaces event, which is called once per frame
+                   * @param {Handsfree} ev.detail.scope The handsfree instance
+                   * @param {Object}    ev.detail.faces An array of face objects
+                   */
+                  window.addEventListener('handsfree-trackFaces', (ev) => {
+                    // Do code with the handsfree instance: ev.detail.scope
+                    // or with the faces ev.detail.faces.forEach(face => {})
+                  })
+                  
+                  /**
+                   * Bind to the handsfree-injectDebugger event
+                   * @param {Handsfree}       ev.detail.scope The handsfree instance
+                   * @param {Canvas2DContent} ev.detail.canvasContext The 2D debug canvas context
+                   */
+                  window.addEventListener('handsfree-injectDebugger', (ev) => {
+                    // Do code with the handsfree instance: ev.detail.scope
+                    // or draw into the canvas with ev.detail.canvasContext
+                  })
+
+        // Clicking on Things
+        section
+          .card
+            .card-header
+              h2.card-title Getting Elements
+            .card-body
+              p You can get the element currently underneath the cursor <code>.cursor.$target</code>:
+              pre
+                code.javascript.
+                  // Outside of plugins
+                  const $target = handsfree.faces[n].cursor.$target
+                  
+                  // Inside plugins
+                  handsfree.use({
+                    onFrame (face) {
+                      const $target = face.cursor.$target
+                    }
+                  })
+
+              p You can do anything with the target with the <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events">dispatchEvent API</a>.

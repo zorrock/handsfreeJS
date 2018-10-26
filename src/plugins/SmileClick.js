@@ -36,7 +36,7 @@ module.exports = {
         instance.cursor.$el.style.background = '#f00'
         instance.cursor.$el.style.border = '2px solid #ff0'
         instance.cursor.$el.classList.add('handsfree-clicked')
-        this.triggerClick(instance)
+        this.triggerClick(face, instance)
       } else {
         instance.cursor.$el.style.background = '#ff0'
         instance.cursor.$el.style.border = '2px solid #f00'
@@ -50,14 +50,14 @@ module.exports = {
    * - Fires a click event
    * - Focuses the element if it's focusable
    */
-  triggerClick: function (instance) {
-    const $el = document.elementFromPoint(instance.cursor.x, instance.cursor.y)
+  triggerClick: function (face) {
+    const $el = face.cursor.$target
 
     if ($el) {
       // Click
       $el.dispatchEvent(new MouseEvent('click', {
-        clientX: instance.cursor.x,
-        clientY: instance.cursor.y
+        clientX: face.cursor.x,
+        clientY: face.cursor.y
       }))
 
       // Focus
