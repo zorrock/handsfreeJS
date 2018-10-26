@@ -130,7 +130,7 @@ class Handsfree {
     // Do things with faces
     this.debug.isDebugging && this.drawFaces()
     this.calculateXY()
-    this.onFrameHooks(this.faces[0])
+    this.onFrameHooks(this.faces)
 
     // Dispatch global event
     window.dispatchEvent(new CustomEvent('handsfree-trackFaces', {detail: {
@@ -146,7 +146,7 @@ class Handsfree {
    * Calculates the X/Y the user is facing
    */
   calculateXY () {
-    this.faces.forEach(face => {
+    this.faces.forEach((face, i) => {
       // Maps a point on the canvas with a point on the window
       const ratio = {
         width: window.outerWidth / this.debug.$canvas.width,
@@ -163,6 +163,11 @@ class Handsfree {
       // Update pointer and vars
       this.cursor.$el.style.left = `${x}px`
       this.cursor.$el.style.top = `${y}px`
+
+      this.faces[i].cursor = {
+        x,
+        y
+      }
     })
   }
 }
