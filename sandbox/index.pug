@@ -15,37 +15,49 @@ div(style='opacity: 0; transition: opacity 0.5s ease')
                   .handsfree-debug-wrap
 
         // Intro Card
-        .card
-          .card-header
-            h1.card-title.text-center <strong class="badge" data-badge="2.0">handsfree.js</strong>
-            p.text-center
-              img.mr-1(src='https://img.shields.io/npm/v/handsfree.svg')
-              img.mr-1(src='https://img.shields.io/github/last-commit/BrowseHandsfree/handsfreeJS.svg')
-              img.mr-1(src='https://travis-ci.org/BrowseHandsfree/handsfreeJS.svg?branch=master')
-              img.mr-1(src='https://img.shields.io/codecov/c/github/BrowseHandsfree/handsfreeJS/master.svg?style=flat')
-            p.card-subtitle.text-gray A JavaScript drop-in library for adding handsfree interfaces to any website, service, and Internet of Thing, and also for creating handsfree games and experiences. Runs on any device that supports the WebRTC protocol.
-          .card-body(style='padding-top: 0')
-            p.text-center
-              button.btn.btn-primary.handsfree-show-when-stopped(onclick='handsfree.start()') Start Webcam
-              button.btn.btn-error.handsfree-show-when-started(onclick='handsfree.stop()') Stop Webcam
-            p 🎉 <b>Hello Fellow Browsers</b>, I'm <a href="https://labofoz.com">Oz Ramos</a> and I've finally got handsfree.js v2 out! Handsfree.js v2 was rewritten to be much easier for developers and end-users. I've also introduced a better plugin architecture and so we're going to be exploring a lot of fun applications!
-            p Click <kbd class="cursor-pointer" onclick='handsfree.start()'>Start Webcam</kbd> above after seeing my work-in-progress <a href="https://labofoz.com/2018/10/24/thinking-about-privacy-and-security/">Privacy and Security notes</a>. Hit me up with questions <a href="https://twitter.com/labofoz">@labofoz</a> and don't forget to <a href="https://patreon.com/browsehandsfree">check out my Patreon</a>!
+        section
+          .card
+            .card-header
+              h1.card-title.text-center <strong class="badge" data-badge="v2">handsfree.js</strong>
+              p.text-center
+                img.mr-1(src='https://img.shields.io/npm/v/handsfree.svg')
+                img.mr-1(src='https://img.shields.io/github/last-commit/BrowseHandsfree/handsfreeJS.svg')
+                img.mr-1(src='https://travis-ci.org/BrowseHandsfree/handsfreeJS.svg?branch=master')
+                img.mr-1(src='https://img.shields.io/codecov/c/github/BrowseHandsfree/handsfreeJS/master.svg?style=flat')
+              p.card-subtitle.text-gray A JavaScript drop-in library for adding handsfree interfaces to any website, service, and Internet of Thing, and also for creating handsfree games and experiences. Runs on any device that supports <a href="https://caniuse.com/#feat=stream">getUserMedia()</a>.
+            .card-body(style='padding-top: 0')
+              p.text-center
+                button.btn.btn-primary.handsfree-show-when-stopped(onclick='handsfree.start()') Start Webcam
+                button.btn.btn-error.handsfree-show-when-started(onclick='handsfree.stop()') Stop Webcam
+              p 🎉 <b>Hello Fellow Browsers</b>, I'm <a href="https://labofoz.com">Oz Ramos</a> and I've finally got handsfree.js v2 out! Handsfree.js v2 was rewritten to be much easier for developers and end-users. I've also introduced a better plugin architecture and so we're going to be exploring a lot of fun applications!
+              p Click <kbd class="cursor-pointer" onclick='handsfree.start()'>Start Webcam</kbd> above after seeing my work-in-progress <a href="https://labofoz.com/2018/10/24/thinking-about-privacy-and-security/">Privacy and Security notes</a>. Hit me up with questions <a href="https://twitter.com/labofoz">@labofoz</a> and don't forget to <a href="https://patreon.com/browsehandsfree">check out my Patreon</a>!
 
         // Installation Notes
-        .card
-          .card-header
-            h2.card-title Installation
-          .card-body
-            p via HTML:
-            pre &lt;script src="https://unpkg.com/handsfree"&gt;&lt;/script&gt;
-            
-            p via NPM:
-            pre npm i handsfree
-            
-            p Then in your project:
-            
-            pre. 
-              &lt;script src="https://unpkg.com/handsfree"&gt;
-                const HandsfreeModule = require('handsfree')
-                const handsfree = new HandsfreeModule({autopointers: true})
-              &lt;/script&gt;
+        section
+          .card
+            .card-header
+              h2.card-title Installation
+            .card-body
+              p via HTML:
+              pre 
+                code.xml &lt;script src="https://unpkg.com/handsfree@2"&gt;&lt;/script&gt;
+              
+              p via NPM:
+              pre
+                code.bash npm i handsfree
+              
+              p Then in your project:
+              
+              pre
+                code.xml.
+                  &lt;script&gt;
+                    const Handsfree = require('handsfree')
+                    const handsfree = new Handsfree({debug: true})
+                  &lt;/script&gt;
+
+        // Listening to Events
+        section
+          .card
+            .card-header
+              h2.card-title Listening to Events
+            .card-body
