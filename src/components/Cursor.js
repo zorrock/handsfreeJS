@@ -13,6 +13,7 @@ module.exports = Handsfree => {
     $cursor.style.width = '20px'
     $cursor.style.height = '20px'
     $cursor.style.borderRadius = '20px'
+    $cursor.style.pointerEvents = 'none'
     $cursor.style.zIndex = 99999999999
 
     document.body.appendChild($cursor)

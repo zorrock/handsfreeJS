@@ -34,5 +34,7 @@ module.exports = Handsfree => {
    */
   Handsfree.prototype.loadPlugins = function () {
     this.use(require('./plugins/Scrolling'))
+    this.use(require('./plugins/SmileClick'))
+    this.use(require('./plugins/SimpleKeyboard'))
   }
 }

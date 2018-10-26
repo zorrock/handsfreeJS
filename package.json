@@ -47,6 +47,7 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
-    "idempotent-babel-polyfill": "^6.26.0-1"
+    "idempotent-babel-polyfill": "^6.26.0-1",
+    "simple-keyboard": "^2.6.7"
   }
 }

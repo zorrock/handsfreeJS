@@ -106,8 +106,19 @@ window.addEventListener('handsfree-injectDebugger', (ev) => {
 ## Classes
 The document body contains `.handsfree-stopped` when handsfree is stopped (this includes when it's been initialized but not started), and `.handsfree-started` when it's on. This lets you style any page on the page!
 
+## Roadmap
+- Enabled/disable plugins
+- Adjust BRFv4 settings (speed vs accuracy)
+- Multi-face support
+- PoseNet fallback (for extreme distances and when BRFv4 can't detect a face)
+- Integration and unit testing
+- Virtual keyboard
+- Morse code keyboard
+- Custom macros (ex: shaking head "no" to undo an action)
+
 ## License
 Uses BRFv4: https://github.com/Tastenkunst/brfv4_javascript_examples
+
 Uses Haar Cascade: haarcascade_frontalface_default.xml
 
 ```
