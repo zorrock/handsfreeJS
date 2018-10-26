@@ -106,6 +106,14 @@ window.addEventListener('handsfree-injectDebugger', (ev) => {
 ## Classes
 The document body contains `.handsfree-stopped` when handsfree is stopped (this includes when it's been initialized but not started), and `.handsfree-started` when it's on. This lets you style any page on the page!
 
+## Further learning
+The best way to learn how everything works is to check out `/sandbox/index.js` which contains everything you need to start (notice how few lines it has)! Then, take a peek at the plugins in `/src/plugins/*.js` to understand how various plugins work.
+
+In order of complexity, you'll want to peek at:
+- `/src/plugins/Scrolling.js`
+- `/src/plugins/SimpleKeyboard.js` (this one doesn't even use the handsfree API!)
+- `/src/plugins/SmileClick.js`
+
 ## Roadmap
 - Enabled/disable plugins
 - Adjust BRFv4 settings (speed vs accuracy)
