@@ -94,3 +94,27 @@ $logoSize = 300px
 
 .handsfree-debugger
   overflow: hidden
+
+.handsfree-cursor:after
+  position: absolute
+  content: ''
+  width: 16px
+  height: 16px
+  border-radius: 16px
+  background: #f00
+  display: block
+  opacity: 0.25
+  z-index: 999998
+  transition: width 0 ease, height 0 ease, border-radius 0.15s ease, margin-left 0.15s ease, margin-top 0.15s ease, opacity 0.35s ease
+
+.handsfree-cursor.handsfree-clicked:after
+  width: 128px
+  height: 128px
+  border-radius: 128px
+  margin-left: -56px
+  margin-top: -56px
+  opacity: 0
+  transition: width 0.15s ease, height 0.15s ease, border-radius 0.15s ease, margin-left 0.15s ease, margin-top 0.15s ease, opacity 0.35s ease
+
+body.handsfree-stopped .handsfree-cursor
+  display: none
