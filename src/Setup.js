@@ -47,6 +47,7 @@ module.exports = Handsfree => {
     this.injectBRFv4()
     this.injectDebugger()
     this.injectCursor()
+    this.loadPlugins()
   }
 
   /**

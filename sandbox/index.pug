@@ -55,9 +55,73 @@ div(style='opacity: 0; transition: opacity 0.5s ease')
                     const handsfree = new Handsfree({debug: true})
                   &lt;/script&gt;
 
-        // Listening to Events
+        // Adding Plugins
         section
           .card
             .card-header
-              h2.card-title Listening to Events
+              h2.card-title Adding Plugins
             .card-body
+              p Handsfree.js is built around plugins. Plugins have several callbacks that hook into different events, and are added with <code>handsfree.use(config)</code>.
+              p Each callback receives two arguments, <code>(faces, instance)</code>. <code>instance</code> refers to the <code>new Handsfree</code> instance you created. <code>faces</code> contains the following:
+              pre
+                code.javascript.
+                  {
+                    // Where on the screen the user is pointed at
+                    cursor: {
+                      x: 0,
+                      y: 0
+                    },
+                    
+                    // A list of all 64 landmarks
+                    points: [{x, y}, ...],
+                  
+                    // The head's pitch (facing up/down)
+                    rotationX: 0,
+                    // The head's yaw (facing left/right)
+                    rotationY: 0,
+                    // The head's roll (as if doing a cartwheel while facing straight ahead)
+                    rotationZ: 0,
+                  
+                    // The heads overall size within the camera
+                    scale: 0,
+                  
+                    // Where the head is relative to the left edge of the video feed
+                    translationX: 0,
+                    // Where the head is relative to the top edge of the video feed
+                    translationY: 0
+                  }
+                  
+              p Here's what our page scrolling plugin looks like:
+              pre
+                code.javascript.
+                  handsfree.use({
+                    // Required. The unique name for this plugin.
+                    // If it's not unique, then it overwrites the previous version of the plugin.
+                    name: 'scrolling',
+                  
+                    // The multiplier to scroll the page by
+                    // Adjust with this.scrollSpeed or handsfree.plugin.scrolling.scrollSpeed
+                    scrollSpeed: 0.1,
+                  
+                    /**
+                     * Scrolls the page when the cursor is above/below the screen
+                     * @param {Array}     faces    The array of face objects
+                     * @param {Handsfree} instance The handsfree instance
+                     */
+                    onFrame (faces, instance) {
+                      faces.forEach(face => {
+                        let x = face.cursor.x
+                        let y = face.cursor.y
+                  
+                        // Then add the points to the cursor!
+                        instance.cursor.$el.style.left = x + 'px'
+                        instance.cursor.$el.style.top = y + 'px'
+                  
+                        // Scroll the page
+                        if (y < 0)
+                          window.scrollTo(0, window.scrollY + y * this.scrollSpeed)
+                        else if (y > window.innerHeight)
+                          window.scrollTo(0, window.scrollY + (y - window.innerHeight) * this.scrollSpeed)
+                      })
+                    }
+                  })

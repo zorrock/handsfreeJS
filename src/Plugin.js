@@ -23,9 +23,16 @@ module.exports = Handsfree => {
   /**
    * Called once per frame, after calculations
    */
-  Handsfree.prototype.onFrameHooks = function () {
+  Handsfree.prototype.onFrameHooks = function (faces) {
     forEach(this.plugin, (config, name) => {
-      config.onFrame && config.onFrame.call(this, this.faces[0])
+      config.onFrame && config.onFrame.call(config, faces, this)
     })
+  }
+
+  /**
+   * Loads all the core plugins
+   */
+  Handsfree.prototype.loadPlugins = function () {
+    this.use(require('./plugins/Scrolling'))
   }
 }
