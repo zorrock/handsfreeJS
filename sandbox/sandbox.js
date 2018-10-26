@@ -22,8 +22,11 @@ window.addEventListener('handsfree-injectDebugger', (ev) => {
   handsfree.debug.$canvas.parentElement.style.display = 'block'
 
   handsfree.drawFaces()
-  document.querySelector('body > div').style.opacity = '1'
 })
+
+setTimeout(() => {
+  document.querySelector('body > div').style.opacity = '1'
+}, 250)
 
 /**
  * Setup sections to be 100% height
