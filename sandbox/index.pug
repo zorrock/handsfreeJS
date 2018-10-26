@@ -139,7 +139,7 @@ div(style='opacity: 0; transition: opacity 0.5s ease')
             .card-header
               h2.card-title Window Events
             .card-body
-              p If you don't have access to the handsfree instance, or if you don't want to create a plugin, an alternative is to listen to the following window events:
+              p If you don't have access to the handsfree instance, or if you don't want to create a plugin, an alternative is to just listen to the following window events:
               
               pre
                 code.javascript.
@@ -191,7 +191,11 @@ div(style='opacity: 0; transition: opacity 0.5s ease')
           .card-body
             p The <code>SimpleKeyboard</code> plugin adds a simple keyboard to the page. The keyboard is rendered into any element with <code>.handsfree-simple-keyboard</code>. <strong>This is currently still being developed.</strong>
 
+            p.text-center
+              button.btn.btn-primary.handsfree-show-when-stopped(onclick='handsfree.start()') Start Webcam
+              button.btn.btn-error.handsfree-show-when-started(onclick='handsfree.stop()') Stop Webcam
+
   .container(style='padding-bottom: 100px')
     .columns
-      .column.col-6.col-md-8.col-sm-10.col-xs-12.col-mx-auto
+      .column.col-12.col-mx-auto
         .handsfree-simple-keyboard
