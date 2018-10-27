@@ -1,6 +1,19 @@
 <div align="center"><img src="/assets/handsfree-2.0-readme-cover.gif" alt="handsfree.js 2.0"></div>
 
-> A drop-in library for adding face-controlled mouse pointers via computer vision 🙈
+> A drop-in library for adding face-controlled mouse pointers via computer vision
+
+## Core Plugins
+### Typing
+**See:** `/src/plugins/SimpleKeyboard.js`
+
+![](https://i.giphy.com/495ysDE36USvobWE0y.gif)
+
+## Demos
+### Drawing
+**See:** `/sandbox/demos/paper.js`
+
+![](https://i.giphy.com/YkBbkI90xxyDM7u8jc.gif)
+
 
 ## Scripts
 
