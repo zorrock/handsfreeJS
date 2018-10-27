@@ -18,6 +18,11 @@ module.exports = Handsfree => {
   Handsfree.prototype.use = function (config) {
     this.plugin[config.name] = config
     config.onUse && config.onUse()
+
+    // Sort alphabetically
+    let newPlugins = {}
+    Object.keys(this.plugin).sort().forEach(key => newPlugins[key] = this.plugin[key])
+    this.plugin = newPlugins
   }
 
   /**

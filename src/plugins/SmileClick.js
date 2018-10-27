@@ -3,7 +3,7 @@
  * @type {Object}
  */
 module.exports = {
-  name: 'SmileClick',
+  name: '0-SmileClick',
 
   mouseDowned: [],
   mouseDown: [],
@@ -68,7 +68,7 @@ module.exports = {
       state.instance.cursor.$el.style.border = '2px solid #ff0'
       state.instance.cursor.$el.classList.add('handsfree-clicked')
     } else {
-      this.mouseUp[state.faceIndex] = this.mouseDown[state.faceIndex]
+      this.mouseUp[state.faceIndex] = this.mouseDowned[state.faceIndex]
       this.mouseDowned[state.faceIndex] = this.mouseDrag[state.faceIndex] = this.mouseDown[state.faceIndex] = false
 
       // Styles

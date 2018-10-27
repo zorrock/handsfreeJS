@@ -64,11 +64,15 @@ To add a plugin, use the `handsfree.use({})` method with the following form:
 
 ```js
 handsfree.use({
+  // Must be unique. Spaces and special characters are fine
+  // Plugins are called alphabetically - to make a plugin load before another prefix it with a number
   name: '',
+
   // Called once when the use method is called and after the plugin is added to the instance
   onUse: () => {},
   // Called once per frame, after calculations, along with the detected face object
-  onFrame: face => {}
+  // To overwrite/modify the properties of faces for use within other plugins, return the faces object
+  onFrame: faces => {}
 })
 ```
 

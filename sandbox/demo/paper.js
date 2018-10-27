@@ -16,15 +16,15 @@ handsfree.use({
     faces.forEach(face => {
       // Only catch events when the cursor is over the canvas
       if (face.cursor.$target === $canvas && face.cursor.state) {
-        if (face.cursor.state.down) {
+        if (face.cursor.state.mouseDown) {
           console.log('down')
         }
 
-        if (face.cursor.state.drag) {
+        if (face.cursor.state.mouseDrag) {
           console.log('drag');
         }
 
-        if (face.cursor.state.up) {
+        if (face.cursor.state.mouseUp) {
           console.log('up');
         }
       }
