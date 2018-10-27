@@ -13,19 +13,31 @@ handsfree.use({
   name: 'PaperDraw',
 
   onFrame (faces) {
-    faces.forEach(face => {
+    faces.forEach((face, faceIndex) => {
       // Only catch events when the cursor is over the canvas
       if (face.cursor.$target === $canvas && face.cursor.state) {
+        // Start path, select a new color
         if (face.cursor.state.mouseDown) {
-          console.log('down')
+          path = new paper.Path()
+          path.strokeColor = {
+            hue: Math.random() * 360,
+            saturation: 1,
+            brightness: 1
+          }
+          path.strokeWidth = 10
+          path.moveTo(new paper.Point(
+            face.cursor.x - $canvas.getBoundingClientRect().left,
+            face.cursor.y - $canvas.getBoundingClientRect().top
+          ))
         }
 
+        // Draw the path
         if (face.cursor.state.mouseDrag) {
-          console.log('drag');
-        }
-
-        if (face.cursor.state.mouseUp) {
-          console.log('up');
+          path.lineTo(new paper.Point(
+            face.cursor.x - $canvas.getBoundingClientRect().left,
+            face.cursor.y - $canvas.getBoundingClientRect().top
+          ))
+          paper.view.draw()
         }
       }
     })
@@ -43,31 +55,20 @@ tool.maxDistance = 45
  * Adapted from: http://paperjs.org/tutorials/interaction/working-with-mouse-vectors/
  */
 tool.onMouseDown = function (event) {
-  console.log(event);
 	path = new paper.Path()
-	path.fillColor = {
+	path.strokeColor = {
 		hue: Math.random() * 360,
 		saturation: 1,
 		brightness: 1
 	}
-
+  path.strokeWidth = 10
 	path.add(event.point)
 }
 
+/**
+ * Handle mouseDrag
+ */
 tool.onMouseDrag = function (event) {
-	var step = event.delta.divide(2)
-	step.angle += 90
-
-	var top = event.middlePoint.add(step)
-	var bottom = event.middlePoint.subtract(step)
-
-	path.add(top)
-	path.insert(0, bottom)
-	path.smooth()
-}
-
-tool.onMouseUp = function (event) {
-	path.add(event.point)
-	path.closed = true
+  path.add(event.point)
 	path.smooth()
 }
