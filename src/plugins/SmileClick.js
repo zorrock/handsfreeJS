@@ -5,10 +5,12 @@
 module.exports = {
   name: 'SmileClick',
 
-  hasClicked: false,
+  mouseDown: [],
+  mouseDrag: [],
+  mouseUp: [],
 
   onFrame: function (faces, instance) {
-    faces.forEach(face => {
+    faces.forEach((face, faceIndex) => {
       let a
       let b
       let smileFactor
@@ -34,30 +36,63 @@ module.exports = {
       if (smileFactor < 0) smileFactor = 0
       if (smileFactor > 1) smileFactor = 1
 
-      if (smileFactor >= 1) {
-        instance.cursor.$el.style.background = '#f00'
-        instance.cursor.$el.style.border = '2px solid #ff0'
-        instance.cursor.$el.classList.add('handsfree-clicked')
-        this.triggerClick(face, instance)
-        this.hasClicked = true
-      } else {
-        this.hasClicked = false
-        instance.cursor.$el.style.background = '#ff0'
-        instance.cursor.$el.style.border = '2px solid #f00'
-        instance.cursor.$el.classList.remove('handsfree-clicked')
-      }
+      this.updateMouseStates({
+        face,
+        faceIndex,
+        instance,
+        smileFactor
+      })
     })
+  },
+
+  /**
+   * Updates the mouse events
+   */
+  updateMouseStates (state) {
+    this.mouseUp[state.faceIndex]
+    this.mouseDown[state.faceIndex]
+    this.mouseDrag[state.faceIndex]
+
+    if (state.smileFactor >= 1) {
+      this.mouseDrag[state.faceIndex] = this.mouseDown[state.faceIndex]
+      this.mouseDown[state.faceIndex] = true
+      this.triggerClick(state.face, state.faceIndex)
+
+      // Styles
+      state.instance.cursor.$el.style.background = '#f00'
+      state.instance.cursor.$el.style.border = '2px solid #ff0'
+      state.instance.cursor.$el.classList.add('handsfree-clicked')
+    } else {
+      this.mouseUp[state.faceIndex] = this.mouseDown[state.faceIndex]
+      this.mouseDrag[state.faceIndex] = this.mouseDown[state.faceIndex] = false
+
+      // Styles
+      state.instance.cursor.$el.style.background = '#ff0'
+      state.instance.cursor.$el.style.border = '2px solid #f00'
+      state.instance.cursor.$el.classList.remove('handsfree-clicked')
+    }
+
+    state.instance.faces[state.faceIndex].mouse = {
+      down: this.mouseDown[state.faceIndex],
+      drag: this.mouseDrag[state.faceIndex],
+      up: this.mouseUp[state.faceIndex]
+    }
+
+    console.log(state.instance.faces[state.faceIndex].mouse);
   },
 
   /**
    * Triggers a click
    * - Fires a click event
    * - Focuses the element if it's focusable
+   *
+   * @param {Object}  face  The face object
+   * @param {Integer} index The face index
    */
-  triggerClick: function (face) {
+  triggerClick: function (face, index) {
     const $el = face.cursor.$target
 
-    if ($el && !this.hasClicked) {
+    if ($el && !this.mouseDown[index]) {
       // Click
       $el.dispatchEvent(new MouseEvent('click', {
         bubbles: true,
