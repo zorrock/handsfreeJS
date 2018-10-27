@@ -1,5 +1,10 @@
+// Setup handsfree.js
 window.handsfree = new Handsfree({debug: true})
-require('./sandbox.js')
+
+// Sandbox related stuff
+require('./setup/sandbox.js')
+// Demos
+require('./demo/setup.js')
 
 /**
  * Bind to the handsfree-trackFaces event
