@@ -13,9 +13,9 @@ handsfree.use({
   name: 'PaperDraw',
 
   onFrame (faces) {
-    faces.forEach((face, faceIndex) => {
+    faces.forEach(face => {
       // Only catch events when the cursor is over the canvas
-      if (face.cursor.$target === $canvas && face.cursor.state) {
+      if (face.cursor.$target === $canvas) {
         // Start path, select a new color
         if (face.cursor.state.mouseDown) {
           path = new paper.Path()

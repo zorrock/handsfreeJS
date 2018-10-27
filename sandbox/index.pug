@@ -207,7 +207,38 @@ div(style='opacity: 0; transition: opacity 0.5s ease')
         .column.col-6.col-xl-8.col-lg-10.col-md-12.col-sm-12.col-xs-12.col-mx-auto
           .card
             .card-header
-              h1.card-title <strong>Demo:</strong> Drawing 
+              h2.card-title <strong>Demo:</strong> Drawing
+              p.card-subtitle.text-grey Source: <code>/sandbox/demos/paper.js</code>
+              p Here we demo the use of <code>face.cursor.state</code>'s. Each face has it's own "state" which you can use within the <code>onFrame</code> callback of a plugin. For instance:
+              
+              pre
+                code.javascript.
+                  handsfree.use({
+                    name: 'PaperDraw',
+                  
+                    onFrame (faces) {
+                      faces.forEach(face => {
+                        // Only catch events when the cursor is over the $canvas
+                        if (face.cursor.$target === $canvas) {
+                          // Called once when the user first clicks
+                          if (face.cursor.state.mouseDown) {
+                            // ...
+                          }
+                          
+                          // Called when the user is still holding a click
+                          if (face.cursor.state.mouseDrag) {
+                            // ...
+                          }
+                  
+                          // Called after the user releases a click
+                          if (face.cursor.state.mouseUp) {
+                            // ...
+                          }
+                        }
+                      })
+                    }
+                  })
+                  
             .card-body(style='padding-top: 0')
               p.text-center
                 button.btn.btn-primary.handsfree-show-when-stopped(onclick='handsfree.start()') Start Webcam
