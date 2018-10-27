@@ -209,7 +209,10 @@ div(style='opacity: 0; transition: opacity 0.5s ease')
             .card-header
               h1.card-title <strong>Demo:</strong> Drawing 
             .card-body(style='padding-top: 0')
-              
+              p.text-center
+                button.btn.btn-primary.handsfree-show-when-stopped(onclick='handsfree.start()') Start Webcam
+                button.btn.btn-error.handsfree-show-when-started(onclick='handsfree.stop()') Stop Webcam
+          
     .container(style='padding-bottom: 100px')
       .columns
         .column.col-12.col-mx-auto
