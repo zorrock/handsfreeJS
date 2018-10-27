@@ -85,8 +85,41 @@ handsfree.use({
   onUse: () => {},
   // Called once per frame, after calculations, along with the detected face object
   // To overwrite/modify the properties of faces for use within other plugins, return the faces object
-  onFrame: faces => {}
+  onFrame: (faces, handsfree) => {}
 })
+```
+
+## The `faces` array
+The `onFrame` recieves a `faces` array, which contains an object for each tracked face. The key properties of the a `face` object include:
+
+```js
+{
+  cursor: {
+    // Where on the screen the user is pointed at
+    x: 0,
+    y: 0,
+    // The target currently under the mouse
+    $target: 0
+  },
+
+  // A list of all 64 landmarks
+  points: [{x, y}, ...],
+
+  // The head's pitch (facing up/down)
+  rotationX: 0,
+  // The head's yaw (facing left/right)
+  rotationY: 0,
+  // The head's roll (as if doing a cartwheel while facing straight ahead)
+  rotationZ: 0,
+
+  // The heads overall size within the camera
+  scale: 0,
+
+  // Where the head is relative to the left edge of the video feed
+  translationX: 0,
+  // Where the head is relative to the top edge of the video feed
+  translationY: 0
+}
 ```
 
 ## Events
