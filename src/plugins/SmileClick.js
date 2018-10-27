@@ -5,6 +5,7 @@
 module.exports = {
   name: 'SmileClick',
 
+  mouseDowned: [],
   mouseDown: [],
   mouseDrag: [],
   mouseUp: [],
@@ -36,26 +37,30 @@ module.exports = {
       if (smileFactor < 0) smileFactor = 0
       if (smileFactor > 1) smileFactor = 1
 
-      this.updateMouseStates({
+      instance.faces[faceIndex].cursor.state = this.updateMouseStates({
         face,
         faceIndex,
         instance,
         smileFactor
       })
     })
+
+    return instance.faces
   },
 
   /**
    * Updates the mouse events
+   * @return new states
    */
   updateMouseStates (state) {
-    this.mouseUp[state.faceIndex]
-    this.mouseDown[state.faceIndex]
-    this.mouseDrag[state.faceIndex]
-
     if (state.smileFactor >= 1) {
-      this.mouseDrag[state.faceIndex] = this.mouseDown[state.faceIndex]
-      this.mouseDown[state.faceIndex] = true
+      this.mouseDrag[state.faceIndex] = this.mouseDowned[state.faceIndex]
+      if (this.mouseDowned[state.faceIndex]) {
+        this.mouseDown[state.faceIndex] = false
+      } else {
+        this.mouseDowned[state.faceIndex] = true
+        this.mouseDown[state.faceIndex] = true
+      }
       this.triggerClick(state.face, state.faceIndex)
 
       // Styles
@@ -64,7 +69,7 @@ module.exports = {
       state.instance.cursor.$el.classList.add('handsfree-clicked')
     } else {
       this.mouseUp[state.faceIndex] = this.mouseDown[state.faceIndex]
-      this.mouseDrag[state.faceIndex] = this.mouseDown[state.faceIndex] = false
+      this.mouseDowned[state.faceIndex] = this.mouseDrag[state.faceIndex] = this.mouseDown[state.faceIndex] = false
 
       // Styles
       state.instance.cursor.$el.style.background = '#ff0'
@@ -72,13 +77,11 @@ module.exports = {
       state.instance.cursor.$el.classList.remove('handsfree-clicked')
     }
 
-    state.instance.faces[state.faceIndex].mouse = {
-      down: this.mouseDown[state.faceIndex],
-      drag: this.mouseDrag[state.faceIndex],
-      up: this.mouseUp[state.faceIndex]
+    return {
+      mouseDown: this.mouseDown[state.faceIndex],
+      mouseDrag: this.mouseDrag[state.faceIndex],
+      mouseUp: this.mouseUp[state.faceIndex]
     }
-
-    console.log(state.instance.faces[state.faceIndex].mouse);
   },
 
   /**
@@ -92,7 +95,7 @@ module.exports = {
   triggerClick: function (face, index) {
     const $el = face.cursor.$target
 
-    if ($el && !this.mouseDown[index]) {
+    if ($el && this.mouseDown[index]) {
       // Click
       $el.dispatchEvent(new MouseEvent('click', {
         bubbles: true,

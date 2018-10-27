@@ -25,7 +25,10 @@ module.exports = Handsfree => {
    */
   Handsfree.prototype.onFrameHooks = function (faces) {
     forEach(this.plugin, (config, name) => {
-      config.onFrame && config.onFrame.call(config, faces, this)
+      if (config.onFrame) {
+        const newFaces = config.onFrame.call(config, faces, this)
+        if (newFaces) this.faces = newFaces
+      }
     })
   }
 

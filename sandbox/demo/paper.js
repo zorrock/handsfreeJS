@@ -12,7 +12,23 @@ let tool
 handsfree.use({
   name: 'PaperDraw',
 
-  onFrame (face) {
+  onFrame (faces) {
+    faces.forEach(face => {
+      // Only catch events when the cursor is over the canvas
+      if (face.cursor.$target === $canvas && face.cursor.state) {
+        if (face.cursor.state.down) {
+          console.log('down')
+        }
+
+        if (face.cursor.state.drag) {
+          console.log('drag');
+        }
+
+        if (face.cursor.state.up) {
+          console.log('up');
+        }
+      }
+    })
   }
 })
 
