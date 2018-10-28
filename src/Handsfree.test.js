@@ -85,3 +85,22 @@ describe('Handsfree.setTouchedElement()', () => {
     expect(handsfree.faces[0].cursor.$target).toBeTruthy()
   })
 })
+
+describe('Handsfree.trackFaces()', () => {
+  it('Enables tracking', () => {
+    handsfree = new Handsfree({debug: true})
+    handsfree.isTracking = false
+    handsfree.brf.resolution = 640
+    handsfree.brf.manager.update = jest.fn()
+    handsfree.brf.manager.getFaces = jest.fn()
+    handsfree.calculateXY = jest.fn()
+    handsfree.setTouchedElement = jest.fn()
+    handsfree.onFrameHooks = jest.fn()
+    handsfree.faces = faces
+
+    handsfree.trackFaces()
+
+    expect(handsfree.isTracking).toBeTruthy()
+    expect(handsfree.onFrameHooks).toHaveBeenCalled()
+  })
+})

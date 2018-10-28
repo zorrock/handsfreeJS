@@ -30,7 +30,7 @@ class Handsfree {
       // Will fallback to ASM if Web ASM isn't supported
       baseURL: this.isWASMSupported ? `${Handsfree.libPath}/assets/libs/brf_wasm/` : `${Handsfree.libPath}/assets/libs/brf_asm/`,
       // The BRFv4 Manager
-      manager: null,
+      manager: {},
       // The BRFv4 Resolution
       resolution: null,
       // The loaded BRFv4 sdk library
@@ -111,7 +111,7 @@ class Handsfree {
     this.isTracking = true
 
     // mirrors the context
-    ctx.setTransform(-1, 0, 0, 1, resolution.widht, 0)
+    ctx.setTransform(-1, 0, 0, 1, resolution.width, 0)
     ctx.drawImage(this.debug.$webcam, 0, 0, resolution.width, resolution.height)
     ctx.setTransform(1, 0, 0, 1, 0, 0)
 
