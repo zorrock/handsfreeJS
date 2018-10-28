@@ -6,3 +6,8 @@ script.setAttribute('src', '')
 Object.defineProperty(document, 'currentScript', {
   value: script
 })
+
+// elementFromPoint
+Object.defineProperty(document, 'elementFromPoint', {
+  value: function () { return {} }
+})

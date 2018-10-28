@@ -1,6 +1,7 @@
 const STUBS = require('../test/jest-polyfills')
 const Handsfree = require('./Handsfree')
 let handsfree = null
+let faces = require('../assets/avatar/face-001')
 
 describe('Constructor', () => {
   it('Fails if getUserMedia is not supported', () => {
@@ -58,5 +59,29 @@ describe('Handsfree.stop()', () => {
     handsfree.stop()
     expect(handsfree.debug.isDebugging).toBeFalsy()
     expect(handsfree.debug.$wrap.style.display).toBe('none')
+  })
+})
+
+describe('Handsfree.calculateXY()', () => {
+  it('Sets the correct cursor x/y', () => {
+    handsfree = new Handsfree({debug: true})
+    handsfree.faces = faces
+
+    expect(handsfree.cursor.x).toBe(-100)
+    expect(handsfree.cursor.y).toBe(-100)
+
+    handsfree.calculateXY()
+    expect(handsfree.cursor.x).not.toBe(-100)
+    expect(handsfree.cursor.y).not.toBe(-100)
+  })
+})
+
+describe('Handsfree.setTouchedElement()', () => {
+  it('Sets a cursor.$target', () => {
+    handsfree = new Handsfree({debug: true})
+    handsfree.faces = faces
+
+    handsfree.setTouchedElement()
+    expect(handsfree.faces[0].cursor.$target).toBeTruthy()
   })
 })

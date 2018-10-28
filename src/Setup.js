@@ -45,7 +45,6 @@ module.exports = Handsfree => {
    */
   Handsfree.prototype.init = function () {
     this.injectBRFv4()
-    this.injectCursor()
     this.loadPlugins()
   }
 
