@@ -1,6 +1,12 @@
-<div align="center"><img src="/assets/handsfree-2.0-readme-cover.gif" alt="handsfree.js 2.0"></div>
+<div align="center">
+  <img src="/assets/handsfree-2.0-readme-cover.gif" alt="handsfree.js 2.0">
+  <blockquote>A drop-in library for adding face-controlled mouse pointers via computer vision</blockquote>
+  <img src="https://img.shields.io/npm/v/handsfree.svg">
+  <img src="https://img.shields.io/github/last-commit/BrowseHandsfree/handsfreeJS.svg">
+  <img src="https://travis-ci.org/BrowseHandsfree/handsfreeJS.svg?branch=master">
+  <img src="https://img.shields.io/codecov/c/github/BrowseHandsfree/handsfreeJS/master.svg?style=flat">
 
-> A drop-in library for adding face-controlled mouse pointers via computer vision
+</div>
 
 ## Core Plugins
 ### Typing
