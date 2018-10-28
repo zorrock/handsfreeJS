@@ -37,8 +37,6 @@ handsfree.use({
           const newPoint = this.getPoint(face)
 
           if (newPoint.getDistance(this.getLastPoint(faceIndex)) > tool.minDistance) {
-            console.log(newPoint.getDistance(this.getLastPoint(faceIndex)))
-
             path.lineTo(new paper.Point(
               face.cursor.x - $canvas.getBoundingClientRect().left,
               face.cursor.y - $canvas.getBoundingClientRect().top
@@ -81,6 +79,7 @@ handsfree.use({
 // Setup Paper.js
 window.paper = paper
 paper.setup($canvas)
+path = new paper.Path()
 tool = new paper.Tool()
 tool.minDistance = 20
 

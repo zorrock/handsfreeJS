@@ -30,7 +30,7 @@ class Handsfree {
       // Will fallback to ASM if Web ASM isn't supported
       baseURL: this.isWASMSupported ? `${Handsfree.libPath}/assets/libs/brf_wasm/` : `${Handsfree.libPath}/assets/libs/brf_asm/`,
       // The BRFv4 Manager
-      manager: null,
+      manager: {},
       // The BRFv4 Resolution
       resolution: null,
       // The loaded BRFv4 sdk library
@@ -56,6 +56,10 @@ class Handsfree {
 
     // Error out if we don't have support
     this.checkForMediaSupport()
+
+    // Inject elements
+    this.injectDebugger()
+    this.injectCursor()
 
     // Initialize and read the BRFv4 Web Assembly binoary into a buffer
     this.initAndMaybeReadWASMBinary()
@@ -99,18 +103,6 @@ class Handsfree {
   }
 
   /**
-   * Toggle the tracker
-   * @param {Boolean|Null} state Whether to start (true) or stop (false), or flip between the two (null)
-   */
-  toggle (state = null) {
-    if (typeof state === 'boolean') this.tracking = state
-    else this.tracking = !this.tracking
-
-    if (this.tracking) this.start()
-    else this.stop()
-  }
-
-  /**
    * Tracks faces
    */
   trackFaces () {
@@ -119,7 +111,7 @@ class Handsfree {
     this.isTracking = true
 
     // mirrors the context
-    ctx.setTransform(-1, 0, 0, 1, resolution.widht, 0)
+    ctx.setTransform(-1, 0, 0, 1, resolution.width, 0)
     ctx.drawImage(this.debug.$webcam, 0, 0, resolution.width, resolution.height)
     ctx.setTransform(1, 0, 0, 1, 0, 0)
 

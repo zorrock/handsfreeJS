@@ -12,6 +12,8 @@ module.exports = Handsfree => {
       } catch (e) {
         this.throwError('ERROR: This browser does not support webcams, please try another browser...like Google Chrome!')
       }
+    } else {
+      this.throwError('ERROR: This browser does not support webcams, please try another browser...like Google Chrome!')
     }
   }
 
