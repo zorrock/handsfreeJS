@@ -100,18 +100,6 @@ class Handsfree {
   }
 
   /**
-   * Toggle the tracker
-   * @param {Boolean|Null} state Whether to start (true) or stop (false), or flip between the two (null)
-   */
-  toggle (state = null) {
-    if (typeof state === 'boolean') this.tracking = state
-    else this.tracking = !this.tracking
-
-    if (this.tracking) this.start()
-    else this.stop()
-  }
-
-  /**
    * Tracks faces
    */
   trackFaces () {

@@ -20,9 +20,7 @@ describe('Handsfree.start()', () => {
   it('Adds body classes', () => {
     handsfree = new Handsfree({debug: true})
     document.body.classList =''
-
     Handsfree.trackFaces = jest.fn()
-    Handsfree.startBRFv4 = jest.fn()
 
     expect(document.body.classList.contains('handsfree-started')).toBeFalsy()
     expect(document.body.classList.contains('handsfree-stopped')).toBeFalsy()
@@ -36,9 +34,7 @@ describe('Handsfree.stop()', () => {
   it('Removes body classes', () => {
     handsfree = new Handsfree({debug: true})
     document.body.classList =''
-
     Handsfree.trackFaces = jest.fn()
-    Handsfree.startBRFv4 = jest.fn()
 
     handsfree.start()
     handsfree.stop()
@@ -49,7 +45,6 @@ describe('Handsfree.stop()', () => {
   it('Turns off tracking', () => {
     handsfree = new Handsfree({debug: true})
     handsfree.isTracking = true
-    Handsfree.startBRFv4 = jest.fn()
 
     handsfree.stop()
     expect(handsfree.isTracking).toBeFalsy()
@@ -59,7 +54,6 @@ describe('Handsfree.stop()', () => {
     handsfree = new Handsfree({debug: true})
     handsfree.isTracking = true
     handsfree.debug.isDebugging = true
-    Handsfree.startBRFv4 = jest.fn()
 
     handsfree.stop()
     expect(handsfree.debug.isDebugging).toBeFalsy()

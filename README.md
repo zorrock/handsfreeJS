@@ -59,8 +59,6 @@ const handsfree = new Handsfree({
 handsfree.start()
 // Stops the webcam
 handsfree.stop()
-// Toggle between start/stop (null), or explicitly set it to on (true) or off (false)
-handsfree.toggle(true|false|null)
 
 // Toggles the debugger on (true), off (false), or flips the state (null)
 handsfree.toggleDebugger(true|false|null)
