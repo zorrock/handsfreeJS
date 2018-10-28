@@ -3,18 +3,9 @@
  */
 
 /**
- * Suppress known warnings
+ * Catch window.alert
  */
-window.consoleWarn = console.warn
-console.warn = function (message, ...args) {
-  switch (message.slice(0, 30)) {
-    case 'Registration of backend webgl ':
-    case 'TypeError: gl.getExtension is ':
-    break
-    default:
-      window.consoleWarn(message, ...args)
-  }
-}
+window.alert = function () {}
 
 /**
  * Suppress known error messages
@@ -22,7 +13,7 @@ console.warn = function (message, ...args) {
 window.consoleError = console.error
 console.error = function (message, ...args) {
   switch (message) {
-    case 'IGNORE THIS ERROR':
+    case 'ERROR: This browser does not support webcams, please try another browser...like Google Chrome!':
     break
     default:
       window.consoleError(message, ...args)
