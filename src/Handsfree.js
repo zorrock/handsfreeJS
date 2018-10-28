@@ -58,6 +58,7 @@ class Handsfree {
     this.checkForMediaSupport()
 
     // Initialize and read the BRFv4 Web Assembly binoary into a buffer
+    this.injectDebugger()
     this.initAndMaybeReadWASMBinary()
     document.body.classList.add('handsfree-stopped')
   }

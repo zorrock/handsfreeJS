@@ -40,7 +40,15 @@ module.exports = {
         getTracks: () => [{stop: jest.fn()}]
       }
       navigator.mediaDevices = {
-        getUserMedia: function () { return {} }
+        getUserMedia: function () {
+          return {
+            then: function () {
+              return {
+                catch: function () {}
+              }
+            }
+          }
+        }
       }
     },
     unsupport () {navigator.mediaDevices = null}
