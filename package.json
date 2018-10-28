@@ -11,7 +11,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=dev webpack-dev-server --progress --mode development --config build/webpack.config.dev.js --open",
     "build": "webpack -p --progress --mode production --config build/webpack.config.build.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "node deploy.js",
+    "test": "jest --detectOpenHandles"
   },
   "repository": {
     "type": "git",
@@ -38,11 +39,11 @@
     "paper": "^0.11.8",
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
+    "shelljs": "^0.8.2",
     "spectre.css": "^0.5.3",
     "style-loader": "^0.22.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "vuepress": "^0.14.4",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5",
