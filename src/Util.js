@@ -22,8 +22,8 @@ module.exports = Handsfree => {
    * @param  {String} msg The message to display
    */
   Handsfree.prototype.throwError = function (msg) {
-    throw new Error(msg)
-    console.error(e)
+    console.error(msg)
     alert(msg)
+    throw new Error(msg)
   }
 }
