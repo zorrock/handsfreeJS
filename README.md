@@ -103,7 +103,17 @@ The `onFrame` recieves a `faces` array, which contains an object for each tracke
     x: 0,
     y: 0,
     // The target currently under the mouse
-    $target: 0
+    $target: 0,
+
+    // Mouse states for this face
+    state: {
+      // The first frame of a click
+      mouseDown: false,
+      // Every subsequent frame of a click
+      mouseDrag: false,
+      // When the click is finally released
+      mouseUp: false
+    }
   },
 
   // A list of all 64 landmarks
