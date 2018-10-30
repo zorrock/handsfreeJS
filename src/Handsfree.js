@@ -28,7 +28,7 @@ class Handsfree {
     // BRFv4 config
     this.brf = {
       // Will fallback to ASM if Web ASM isn't supported
-      baseURL: this.isWASMSupported ? `${Handsfree.libPath}/assets/libs/brf_wasm/` : `${Handsfree.libPath}/assets/libs/brf_asm/`,
+      // baseURL: this.isWASMSupported ? `${Handsfree.libPath}/assets/libs/brf_wasm/` : `${Handsfree.libPath}/assets/libs/brf_asm/`,
       // The BRFv4 Manager
       manager: {},
       // The BRFv4 Resolution
@@ -62,7 +62,7 @@ class Handsfree {
     this.injectCursor()
 
     // Initialize and read the BRFv4 Web Assembly binoary into a buffer
-    this.initAndMaybeReadWASMBinary()
+    this.loadWASMBinary()
     document.body.classList.add('handsfree-stopped')
   }
 
@@ -111,7 +111,6 @@ class Handsfree {
     this.isTracking = true
 
     // mirrors the context
-    ctx.setTransform(-1, 0, 0, 1, resolution.width, 0)
     ctx.drawImage(this.debug.$webcam, 0, 0, resolution.width, resolution.height)
     ctx.setTransform(1, 0, 0, 1, 0, 0)
 
@@ -173,9 +172,6 @@ class Handsfree {
     })
   }
 }
-
-// Set the lib path to whereever this file is, this is required for loading the BRFv4 SDK
-Handsfree.libPath = trimStart(document.currentScript.getAttribute('src').replace('handsfree.js', ''), '/')
 
 // Remember: to kick things off you'll want to instantiate this with `new`
 require('./Setup')(Handsfree)

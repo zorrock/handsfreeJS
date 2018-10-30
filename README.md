@@ -188,6 +188,9 @@ In order of complexity, you'll want to peek at:
 - Morse code keyboard
 - Custom macros (ex: shaking head "no" to undo an action)
 
+## Sanity Notes
+- We're `require`ing BRFv4 as a WASM module. When we use a future update of BRFv4, remember to modify the .js file so that it exports as a module
+
 ## License
 Uses BRFv4: https://github.com/Tastenkunst/brfv4_javascript_examples
 

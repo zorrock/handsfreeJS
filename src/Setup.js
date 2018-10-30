@@ -1,4 +1,6 @@
 const {assign} = require('lodash')
+const BRFvInitializer = require('./libs/brf_wasm/BRFv4_JS_TK110718_v4.1.0_trial.js')
+const BRFwasm = require('./libs/brf_wasm/BRFv4_JS_TK110718_v4.1.0_trial.wasm')
 
 module.exports = Handsfree => {
   /**
@@ -15,50 +17,9 @@ module.exports = Handsfree => {
   /**
    * Reads the Web ASM Binary into a buffer if it's supported
    */
-  Handsfree.prototype.initAndMaybeReadWASMBinary = function () {
-    if (this.isWASMSupported) {
-      let xhr = new XMLHttpRequest()
-      let url = this.brf.baseURL + this.brf.sdkName + '.wasm'
-      let onError = err => this.throwError(err)
-      let onProgress = progress => console.log(progress)
-
-      xhr.open('GET', url, true)
-      xhr.responseType = 'arraybuffer'
-      xhr.onload = () => {
-        if (xhr.status === 200 || xhr.status === 0 && xhr.response) {
-          this.brf.WASMBuffer = xhr.response
-          this.init()
-        } else {
-          onError()
-        }
-      }
-      xhr.onerror = onError
-      xhr.onprogress = onProgress
-      xhr.send(null)
-    } else {
-      this.init()
-    }
-  }
-
-  /**
-   * Initializes BRFv4
-   */
-  Handsfree.prototype.init = function () {
-    this.injectBRFv4()
+  Handsfree.prototype.loadWASMBinary = function () {
+    this.brf.WASMBuffer = BRFwasm
     this.loadPlugins()
-  }
-
-  /**
-   * Injects the BRFv4 library into the DOM
-   */
-  Handsfree.prototype.injectBRFv4 = function () {
-    let $script = document.createElement('script')
-
-    $script.setAttribute('type', 'text/javascript')
-    $script.setAttribute('async', true)
-    $script.setAttribute('src', this.brf.baseURL + this.brf.sdkName + '.js')
-
-    document.body.appendChild($script)
   }
 
   /**
@@ -87,12 +48,12 @@ module.exports = Handsfree => {
     // Set up the namespace and initialize BRFv4.
     // locateFile tells the asm.js version where to find the .mem file.
     // wasmBinary gets the preloaded .wasm file.
-    if (this.brf.sdk === null && window.hasOwnProperty('initializeBRF')) {
+    if (this.brf.sdk === null) {
       this.brf.sdk = {
         locateFile: fileName => this.brf.baseURL + fileName,
         wasmBinary: this.brf.WASMBuffer
       }
-      initializeBRF(this.brf.sdk)
+      BRFvInitializer(this.brf.sdk)
     }
 
     if (this.brf.sdk && this.brf.sdk.sdkReady) {
