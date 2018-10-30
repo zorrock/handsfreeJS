@@ -8,6 +8,29 @@
 
 </div>
 
+## Important Note 10/29
+> I refactored the package down from 86Mb to 13Mb. Problem is that the library loads this 13Mb chunk all at once so it can take a minute or two on slower connections. This will be fixed in the next few days. If you're demoing from CDN, just keep using https://unpkg.com/handsfree@2.0.3. Happy browsing!
+~ Ozzy
+
+## Quickstart
+
+```html
+<script src="https://unpkg.com/handsfree@2.0.3"></script>
+```
+
+or
+
+```js
+npm i handsfree
+```
+
+then
+
+```js
+const handsfree = new Handsfree({debug: true})
+handsfree.start()
+```
+
 ## Core Plugins
 ### Typing
 **See:** `/src/plugins/SimpleKeyboard.js`
