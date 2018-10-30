@@ -8,14 +8,12 @@
     "/dist/**/*",
     "/src/**/*"
   ],
-
   "scripts": {
     "dev": "cross-env NODE_ENV=dev webpack-dev-server --progress --mode development --config build/webpack.config.dev.js --open",
     "build": "webpack -p --progress --mode production --config build/webpack.config.build.js",
     "deploy": "node deploy.js",
     "test": "jest --detectOpenHandles"
   },
-
   "jest": {
     "collectCoverage": true,
     "coverageDirectory": "coverage",
@@ -34,7 +32,6 @@
       "/sandbox/"
     ]
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/labofoz/browsehandsfree.git"
@@ -46,9 +43,10 @@
   },
   "homepage": "https://github.com/labofoz/browsehandsfree#readme",
   "devDependencies": {
+    "arraybuffer-loader": "^1.0.7",
     "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
     "babel-jest": "^23.4.2",
+    "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.2",
